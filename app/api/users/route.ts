@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   const users = await prisma.user.findMany();
@@ -14,7 +14,8 @@ export async function POST(request: Request) {
     return new Response(JSON.stringify(user), {
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch {
+  } catch (error) {
+    console.error('POST /api/users error:', error);
     return new Response(JSON.stringify({ error: 'Failed to create user' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
