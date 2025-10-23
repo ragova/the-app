@@ -1,7 +1,8 @@
-// import { prisma } from '@/server/prisma';
+export const runtime = 'nodejs';
+import { prisma } from '@/server/prisma';
 
 export async function GET() {
-  const { prisma } = await import('@/server/prisma');
+  // const { prisma } = await import('@/server/prisma');
   const users = await prisma.user.findMany();
   return new Response(JSON.stringify(users), {
     headers: { 'Content-Type': 'application/json' },
@@ -9,7 +10,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { prisma } = await import('@/server/prisma');
+  // const { prisma } = await import('@/server/prisma');
   try {
     const data = await request.json();
     const user = await prisma.user.create({ data });
